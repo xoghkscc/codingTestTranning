@@ -1,1 +1,1 @@
-# codingTestLv1Tranning
+# codingTest LV1 트레이닝
