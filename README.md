@@ -83,20 +83,20 @@ class Solution {
 ### 2번 문제
 ![image](https://github.com/xoghkscc/codingTestLv1Tranning/assets/82793713/1ae2621a-5e91-423e-a810-90f765cfdb26)
 
-```sql
+```oraclesql
 SELECT
     UGB.TITLE
     , UGB.BOARD_ID
     , UGR.REPLY_ID
     , UGR.WRITER_ID
     , UGR.CONTENTS
-    , DATE_FORMAT(UGR.CREATED_DATE, '%Y-%m-%d') CREATED_DATE
+    , TO_CHAR(UGR.CREATED_DATE, 'yyyy-mm-dd') CREATED_DATE
 FROM
     USED_GOODS_BOARD UGB
     , USED_GOODS_REPLY UGR
 WHERE 1=1
     AND UGB.BOARD_ID = UGR.BOARD_ID
-    AND UGB.CREATED_DATE BETWEEN '20221001' AND '20221031'
+    AND TO_CHAR(UGB.CREATED_DATE, 'mm') = '10'
 ORDER BY
     UGR.CREATED_DATE
     , UGB.TITLE;
