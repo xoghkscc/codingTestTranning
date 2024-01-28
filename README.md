@@ -85,6 +85,7 @@ class Solution {
 
 ```sql
 --oracle
+
 SELECT
     UGB.TITLE
     , UGB.BOARD_ID
