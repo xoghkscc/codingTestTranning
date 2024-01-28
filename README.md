@@ -1,6 +1,7 @@
 # codingTest LV1 트레이닝
 
 ## 24.01.28
+
 ### 1번 문제
 ![image](https://github.com/xoghkscc/codingTestLv1Tranning/assets/82793713/4a09cc13-034b-4173-88e6-013bfbbc770d)
 
@@ -77,4 +78,26 @@ class Solution {
         return new_id;
     }
 }
+```
+
+### 2번 문제
+![image](https://github.com/xoghkscc/codingTestLv1Tranning/assets/82793713/1ae2621a-5e91-423e-a810-90f765cfdb26)
+
+```sql
+SELECT
+    UGB.TITLE
+    , UGB.BOARD_ID
+    , UGR.REPLY_ID
+    , UGR.WRITER_ID
+    , UGR.CONTENTS
+    , DATE_FORMAT(UGR.CREATED_DATE, '%Y-%m-%d') CREATED_DATE
+FROM
+    USED_GOODS_BOARD UGB
+    , USED_GOODS_REPLY UGR
+WHERE 1=1
+    AND UGB.BOARD_ID = UGR.BOARD_ID
+    AND UGB.CREATED_DATE BETWEEN '20221001' AND '20221031'
+ORDER BY
+    UGR.CREATED_DATE
+    , UGB.TITLE;
 ```
