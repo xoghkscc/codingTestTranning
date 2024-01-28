@@ -9,9 +9,8 @@ import java.util.*;
 
 class Solution {
     public String solution(String new_id) {
-        
-        new_id = new_id.toLowerCase(); //1단계 소문자로 치환
-        
+        //1단계 소문자로 치환
+        new_id = new_id.toLowerCase(); 
         
         //2단계
         HashSet<String> set = new HashSet<>();
@@ -40,9 +39,7 @@ class Solution {
                 sb.append(new_id.charAt(i));
             }
         }
-        
-        new_id = sb.toString();
-        
+
         //4단계
         //.이 첫째자리라면 첫째자리 자름
         if(sb.indexOf(".") == 0){
