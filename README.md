@@ -83,7 +83,7 @@ class Solution {
 ### 2번 문제
 ![image](https://github.com/xoghkscc/codingTestLv1Tranning/assets/82793713/1ae2621a-5e91-423e-a810-90f765cfdb26)
 
-```oraclesql
+```sql
 SELECT
     UGB.TITLE
     , UGB.BOARD_ID
