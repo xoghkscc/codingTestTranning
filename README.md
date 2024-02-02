@@ -151,6 +151,27 @@ class Solution {
 }
 ```
 
+### 3번 문제
+![image](https://github.com/xoghkscc/codingTestLv1Tranning/assets/82793713/3fbe5167-eaa1-4061-ab80-29ef1494678e)
+
+```java
+-- 코드를 입력하세요
+SELECT
+    UGB.BOARD_ID
+    , UGB.WRITER_ID
+    , UGB.TITLE
+    , UGB.PRICE
+    , CASE WHEN UGB.STATUS = 'SALE' THEN '판매중'
+           WHEN UGB.STATUS = 'RESERVED' THEN '예약중'
+           ELSE '거래완료' END AS STATUS
+FROM
+    USED_GOODS_BOARD UGB
+WHERE
+    TO_CHAR(UGB.CREATED_DATE, 'YYYYMMDD') = '20221005'
+ORDER BY
+    UGB.BOARD_ID DESC;
+```
+
 ## 24.01.28
 
 ### 1번 문제
