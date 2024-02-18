@@ -1,4 +1,4 @@
-# codingTest LV1 트레이닝
+# codingTest 트레이닝
 
 ## 24.02.18
 
