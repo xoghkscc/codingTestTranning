@@ -90,6 +90,84 @@ class Person{
 }
 ```
 
+### 2번 문제
+![image](https://github.com/xoghkscc/codingTestTranning/assets/82793713/fdaa5a53-3d95-4b6b-abc2-5f1542ef3a2d)
+
+```java
+import java.util.*;
+
+class Solution {
+    public int solution(String[] board) {   
+        int answer = 0;
+                 //    북  남  서  동
+        int[] x_curl = {0, 0, 1, -1};    
+        int[] y_curl = {1, -1, 0, 0};
+
+        int start_x=0;
+        int start_y=0;
+        
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length(); j++){
+                if(board[i].charAt(j) == 'R'){
+                    start_x = j; 
+                    start_y = i; 
+                }
+            }
+        }
+        Queue<Node> queue = new LinkedList<>();
+        
+        queue.add(new Node(start_x, start_y, 0));
+        
+        ArrayList<String> list = new ArrayList<>(); //들린곳 저장
+           
+        while(!queue.isEmpty()){
+            Node temp = queue.poll();
+            temp.cnt++;
+            
+            for(int i = 0; i < 4; i++){
+                
+                int temp_x = temp.x; 
+                int temp_y = temp.y; 
+                
+                int x_move = x_curl[i];
+                int y_move = y_curl[i];
+
+                while(true){
+                    temp_x = temp_x + x_move;
+                    temp_y = temp_y + y_move;
+                    
+                    if(temp_x > board[0].length() -1 || temp_y > board.length -1 || temp_x < 0 || temp_y < 0 || board[temp_y].charAt(temp_x) == 'D'){
+                        temp_x = temp_x - x_move;
+                        temp_y = temp_y - y_move;
+                        break;
+                    }
+                }
+
+                if(board[temp_y].charAt(temp_x) == 'G'){
+                    return temp.cnt;
+                } else if((board[temp_y].charAt(temp_x) == '.') && !list.contains(temp_x + " " + temp_y)){ //들리지 않은 곳만 queue에 저장
+                    list.add(temp_x + " " + temp_y); //들린 이력 남기기 <--이거 없으면 타임아웃 남
+                    queue.add(new Node(temp_x, temp_y, temp.cnt));
+                }
+            }
+        }
+        return -1;
+    }
+}
+
+class Node {
+    int cnt;
+    int x;
+    int y;
+    
+    public Node(int x, int y, int cnt){
+        this.x = x;
+        this.y = y;
+        this.cnt = cnt;
+    }
+}
+```
+
 ## 24.02.13
 
 ### 1번 문제
