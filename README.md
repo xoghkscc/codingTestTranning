@@ -10,10 +10,7 @@ import java.util.*;
 
 class Solution {
     public int solution(String[] friends, String[] gifts) {
-        
-        
-        System.out.println(Arrays.toString(gifts));
-        
+       
         HashMap<String, Person> map = new HashMap<>();
         
         for(String name : friends){
@@ -23,14 +20,14 @@ class Solution {
         for(String gift : gifts){
             String[] str = gift.split(" ");
             
-            map.get(str[0]).giftList.add(str[1]);
-            map.get(str[1]).giftList2.add(str[0]);
+            map.get(str[0]).giftList.add(str[1]); //선물한 리스트 추가
+            map.get(str[1]).giftList2.add(str[0]); //선물받은 리스트 추가
         }
 
         for(String name : friends){
             Person person = map.get(name);
             for(String name2 : friends){
-                if(person.getCnt(name2, map.get(name2).giftIndex()) > 0){
+                if(person.getCnt(name2, map.get(name2).giftIndex()) > 0){ //양수라면 name가 name2에게 선물을 받아야함
                     person.getGiftCnt++;
                 }
             }
@@ -41,9 +38,8 @@ class Solution {
         int answer = 0;
         
         for(String name : friends){
-            if(answer <= map.get(name).getGiftCnt) answer = map.get(name).getGiftCnt;
+            if(answer <= map.get(name).getGiftCnt) answer = map.get(name).getGiftCnt; //가장 많은 선물을 받는 수
         }
-
         return answer;
     }
 }
@@ -61,13 +57,13 @@ class Person{
         this.giftList2 = new ArrayList<>();
     }
     
-    public int giftIndex(){
+    public int giftIndex(){ //선물지수 리턴
         return giftList.size() - giftList2.size();
     }
     
-    public int getCnt(String inputName, int giftIndex){ //입력한 사람보다 name의 선물 횟수가 더 많으면 양수 리턴 입력한 사람의 선물 횟수가 더 많으면 음수 리턴 혹은 선물 지수를 따지기
-        int index1 = 0; //name이 입력받은 사람한테 선물한 횟수
-        int index2 = 0; //name이 입력받은 사람한테 선물받은 횟수
+    public int getCnt(String inputName, int giftIndex){ //입력한 사람(inputName)보다 name의 선물 횟수가 더 많으면 양수 리턴 입력한 사람의 선물 횟수가 더 많으면 음수 리턴 혹은 선물 지수를 따지기
+        int index1 = 0; //name이 inputName한테 선물한 횟수
+        int index2 = 0; //name이 inputName한테 선물받은 횟수
         
         for(int i = 0; i < giftList.size(); i++){
             if(inputName.equals(giftList.get(i))) index1++;
@@ -78,16 +74,16 @@ class Person{
         }
         
         if(index1 != index2){
-            return index1 - index2;
+            return index1 - index2; //name이 inputName에게 선물한 횟수가 많다면 양수 아니면 음수 리턴
         } else if(this.giftIndex() != giftIndex){
-            return this.giftIndex() - giftIndex;
+            return this.giftIndex() - giftIndex; //서로 선물을 주고받은 적이 없을때 선물지수 차 리턴
         } else {
-            return 0;
+            return 0; //선물 주고 받은 적도 없고 선물지수도 같다면 0 리턴
         }
         
     }
     
-    public String toString(){
+    public String toString(){ //디버깅용
         return name + "이 선물한 사람 리스트: " + giftList.toString() + ", " + name + "에게 선물한 사람 리스트:" + giftList2.toString() + " 받아야할 선물의 수:" + getGiftCnt;
     }
     
