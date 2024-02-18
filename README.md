@@ -1,5 +1,99 @@
 # codingTest LV1 트레이닝
 
+## 24.02.18
+
+### 1번 문제
+![image](https://github.com/xoghkscc/codingTestTranning/assets/82793713/bcf3d7a6-0971-4c09-a6f6-ff2bbffd7463)
+
+```java
+import java.util.*;
+
+class Solution {
+    public int solution(String[] friends, String[] gifts) {
+        
+        
+        System.out.println(Arrays.toString(gifts));
+        
+        HashMap<String, Person> map = new HashMap<>();
+        
+        for(String name : friends){
+            map.put(name, new Person(name));
+        }
+        
+        for(String gift : gifts){
+            String[] str = gift.split(" ");
+            
+            map.get(str[0]).giftList.add(str[1]);
+            map.get(str[1]).giftList2.add(str[0]);
+        }
+
+        for(String name : friends){
+            Person person = map.get(name);
+            for(String name2 : friends){
+                if(person.getCnt(name2, map.get(name2).giftIndex()) > 0){
+                    person.getGiftCnt++;
+                }
+            }
+        }
+        
+        //System.out.println(map.toString());
+        
+        int answer = 0;
+        
+        for(String name : friends){
+            if(answer <= map.get(name).getGiftCnt) answer = map.get(name).getGiftCnt;
+        }
+
+        return answer;
+    }
+}
+
+class Person{
+    String name;
+    int getGiftCnt; //받아야 할 선물 개수
+    ArrayList<String> giftList; //name이 선물한 사람 리스트
+    ArrayList<String> giftList2; //name에게 선물한 사람 리스트
+    
+    public Person(String nameInput){
+        this.name = nameInput;
+        this.getGiftCnt = 0;
+        this.giftList = new ArrayList<>();
+        this.giftList2 = new ArrayList<>();
+    }
+    
+    public int giftIndex(){
+        return giftList.size() - giftList2.size();
+    }
+    
+    public int getCnt(String inputName, int giftIndex){ //입력한 사람보다 name의 선물 횟수가 더 많으면 양수 리턴 입력한 사람의 선물 횟수가 더 많으면 음수 리턴 혹은 선물 지수를 따지기
+        int index1 = 0; //name이 입력받은 사람한테 선물한 횟수
+        int index2 = 0; //name이 입력받은 사람한테 선물받은 횟수
+        
+        for(int i = 0; i < giftList.size(); i++){
+            if(inputName.equals(giftList.get(i))) index1++;
+        }
+        
+        for(int i = 0; i < giftList2.size(); i++){
+            if(inputName.equals(giftList2.get(i))) index2++;
+        }
+        
+        if(index1 != index2){
+            return index1 - index2;
+        } else if(this.giftIndex() != giftIndex){
+            return this.giftIndex() - giftIndex;
+        } else {
+            return 0;
+        }
+        
+    }
+    
+    public String toString(){
+        return name + "이 선물한 사람 리스트: " + giftList.toString() + ", " + name + "에게 선물한 사람 리스트:" + giftList2.toString() + " 받아야할 선물의 수:" + getGiftCnt;
+    }
+    
+}
+```
+
 ## 24.02.13
 
 ### 1번 문제
