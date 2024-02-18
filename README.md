@@ -168,6 +168,22 @@ class Node {
 }
 ```
 
+### 3번 문제
+![image](https://github.com/xoghkscc/codingTestTranning/assets/82793713/9fbe8cb9-4bde-44b4-b4d2-38eda1175c9c)
+
+```sql
+SELECT
+    AO.ANIMAL_ID
+    , AO.NAME
+FROM
+    ANIMAL_OUTS AO
+    LEFT OUTER JOIN ANIMAL_INS AI ON AI.ANIMAL_ID = AO.ANIMAL_ID	
+WHERE
+    AI.ANIMAL_ID IS NULL
+ORDER BY
+    AO.ANIMAL_ID
+```
+
 ## 24.02.13
 
 ### 1번 문제
